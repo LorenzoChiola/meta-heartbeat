@@ -22,7 +22,7 @@ Adapted by Lorenzo Chiola.
 The application is composed of a kernel module, heartmonkmod, that collects data from hardware sensors, and a userspace application, heartbeat, which deduces the heart rate in bpm from the data colleccted by heartmonkmod.
 
 ### heartmonkmod
-This module currently presents one device (`/dev/heartmon0`) as a character device generating predefined data at the rate of 50 per second. Every call to read() will get the next datapoint (after a wait, if no data is ready) as an integer in ASCII format, followed by a newline.
+This module currently presents one device (`/dev/heartmon0`) as a character device generating predefined data at the rate of 50 per second. Every call to `read()` will get the next datapoint (after a wait, if no data is ready) as an integer in ASCII format, followed by a newline.
 
 The layer is configured to load this module at boot if you add the KERNEL_MODULE_AUTOLOAD line to your build's local.conf file (see above).
 
@@ -31,7 +31,7 @@ The device file is created automatically by the module.
 ### heartbeat
 This userspace application reads 2048 datapoints from the character device presented by heartmonkmod.<br />
 The heart rate (displayed in bpm) is extracted from the data using an FFT transform.<br />
-Note: a heart rate reading is output every 2048 * (1 / 50 Hz) = 41 seconds.<br />
+Note: a heart rate reading is output every `2048 * (1 / 50 Hz) = 41 seconds`.<br />
 
 The default device file is `"/dev/heartmon0"`; this can be changed entering the path of another file as the only command line parameter of heartbeat.
   
